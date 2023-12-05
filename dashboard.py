@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import font_manager
 
-font_path = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')[0]
-korean_font = font_manager.FontProperties(fname=font_path)
+# font_path = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')[0]
+# korean_font = font_manager.FontProperties(fname=font_path)
 
 # Load data
 df1 = pd.read_csv('./git_data/grid_병합.csv')
@@ -88,7 +88,7 @@ def show_species_data():
     words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
     #words_count_df = words_count_df.head(50
 
-    wordcloud1 = WordCloud(font_path = korean_font, idth=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
+    wordcloud1 = WordCloud(idth=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
     
     fig1 = plt.figure(figsize=(5, 5))
     plt.title(select_species+"의 부정 단어 워드클라우드")
@@ -108,7 +108,7 @@ def show_species_data():
     words_df1 = words_df1.query('count > 4')
     words_df1 = words_df1.head(50)
 
-    wordcloud2 = WordCloud(font_path = korean_font, width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
+    wordcloud2 = WordCloud(width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
 
     fig2 = plt.figure(figsize=(5, 5))
     plt.title(select_species+"의 부정 단어 워드클라우드")
