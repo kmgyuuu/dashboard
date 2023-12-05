@@ -9,17 +9,7 @@ from streamlit_folium import st_folium
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-# # 한글 폰트 사용을 위해서 세팅
-# from matplotlib import font_manager, rc, rcParams
-# font_path = "C:/Windows/Fonts/malgun.ttf"
-# font = font_manager.FontProperties(fname = font_path).get_name()
-# rc('font', family = font)
-
-# Colab 의 한글 폰트 설정
 plt.rc('font', family='NanumBarunGothic') 
-
-# #마이너스 깨짐 현상 해결
-# rcParams['axes.unicode_minus'] = False
 
 # Load data
 df1 = pd.read_csv('./git_data/grid_병합.csv')
@@ -96,7 +86,7 @@ def show_species_data():
     words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
     words_count_df = words_count_df.head(50)
 
-    wordcloud1 = WordCloud(font_path= 'malgun',width=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
+    wordcloud1 = WordCloud(font_path = font,width=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
     
     fig1 = plt.figure(figsize=(5, 5))
     plt.title(select_species+"의 부정 단어 워드클라우드")
@@ -116,7 +106,7 @@ def show_species_data():
     words_df1 = words_df1.query('count > 4')
     words_df1 = words_df1.head(50)
 
-    wordcloud2 = WordCloud(font_path='malgun', width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
+    wordcloud2 = WordCloud(font_path = font, width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
 
     fig2 = plt.figure(figsize=(5, 5))
     plt.title(select_species+"의 부정 단어 워드클라우드")
