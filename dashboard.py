@@ -1,31 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# import plotly.express as px
-# import openpyxl
-
-# review = pd.read_csv('./data/지점별_월별_리뷰수.csv')
-# emotion = pd.read_csv('./data/지점별_감정분석.csv')
-
-# emotion = emotion[['지점명','label']]
-# emotion = emotion.groupby('지점명').agg({'label': ['count', 'sum']})
-# emotion = emotion.assign(ratio=emotion[('label', 'sum')] / emotion[('label', 'count')])
-
-# st.sidebar.title('Iris Species🌸')
-
-# select_species = st.sidebar.selectbox(
-#     '확인하고 싶은 종을 선택하세요',
-#     ['유성DT점', '카이스트점', '가수원DT점', '가장DT점', '한남대DT점', '세이브존_대전점', '센트럴DT점', '대전터미널점', '부사DT점', '신탄진DT점', '유천DT점', '목원대점']
-# )
-
-# review_counts = review[review['지점명']== select_species]
-
-# counts = review_counts['YearMonth'].value_counts().sort_index()
-# lineplot = px.line(x = counts.index.astype(str), y=counts.values, markers=True, labels={'x': '년월', 'y': '데이터 개수'})
-# emotionplot = go.Figure(go.Indicator(mode="gauge+number",value=emotion[emotion.index == select_species]['ratio'].values, domain={'x': [0, 1], 'y': [0, 1]}, title={'text':  select_species + "소비자 점수"} ,gauge={'axis': {'range': [None, 100]}}))
-
-# st.table(review_counts.head())
-# st.plotly_chart(lineplot)
-
 import folium
 import streamlit as st
 import pandas as pd
@@ -37,24 +9,26 @@ from streamlit_folium import st_folium
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-# 한글 폰트 사용을 위해서 세팅
-from matplotlib import font_manager, rc, rcParams
-font_path = "C:/Windows/Fonts/malgun.ttf"
-font = font_manager.FontProperties(fname = font_path).get_name()
-rc('font', family = font)
+# # 한글 폰트 사용을 위해서 세팅
+# from matplotlib import font_manager, rc, rcParams
+# font_path = "C:/Windows/Fonts/malgun.ttf"
+# font = font_manager.FontProperties(fname = font_path).get_name()
+# rc('font', family = font)
+
+font = "Helvetica Neue"
 
 #마이너스 깨짐 현상 해결
 rcParams['axes.unicode_minus'] = False
 
 # Load data
-df1 = pd.read_csv('./data/grid_병합.csv')
-df2 = pd.read_csv('./data/grid_4.csv')
-review = pd.read_csv('./data/지점별_월별_리뷰수.csv')
-emotion = pd.read_csv('./data/지점별_감정분석.csv')
-keyword = pd.read_csv('./data/지점별_키워드.csv')
-best_grid = gpd.read_file('./1km_grid/nlsp_020001001.shp' ,encoding='utf8')
-wordcloud_df = pd.read_csv('./data/지점별_워드클라우드.csv')
-dong = pd.read_csv("./data/좌표_동일업체.csv")
+df1 = pd.read_csv('./git_data/grid_병합.csv')
+df2 = pd.read_csv('./git_data/grid_4.csv')
+review = pd.read_csv('./git_data/지점별_월별_리뷰수.csv')
+emotion = pd.read_csv('./git_data/지점별_감정분석.csv')
+keyword = pd.read_csv('./git_data/지점별_키워드.csv')
+best_grid = gpd.read_file('./git_data/nlsp_020001001.shp' ,encoding='utf8')
+wordcloud_df = pd.read_csv('./git_data/지점별_워드클라우드.csv')
+dong = pd.read_csv("./git_data/좌표_동일업체.csv")
 
 emotion = emotion[['지점명','label']]
 emotion = emotion.groupby('지점명').agg({'label': ['count', 'sum']})
