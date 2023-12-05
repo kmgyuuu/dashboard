@@ -86,7 +86,7 @@ def show_species_data():
 
     words_df = words_df.query('count >= 2')
     words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
-    words_count_df = words_count_df.head(50)
+    #words_count_df = words_count_df.head(50
 
     wordcloud1 = WordCloud(font_path = korean_font, idth=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
     
