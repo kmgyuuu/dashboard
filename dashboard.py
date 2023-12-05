@@ -78,45 +78,45 @@ def show_species_data():
                                         title={'text': select_species+" 소비자 점수"},
                                         gauge={'axis': {'range': [None, 100]}}))
 
-    # ### 긍정 워드클라우드
-    # ture_df = wordcloud_df[wordcloud_df['지점명'] == select_species]
-    # positive_data = ture_df[ture_df['label'] == 1]
-    # positive_data['content'] = positive_data['content'].str.replace('\n', '')
+    ### 긍정 워드클라우드
+    ture_df = wordcloud_df[wordcloud_df['지점명'] == select_species]
+    positive_data = ture_df[ture_df['label'] == 1]
+    positive_data['content'] = positive_data['content'].str.replace('\n', '')
     
-    # words = positive_data['content'].explode()
-    # words_df = pd.DataFrame({'word': words})
-    # words_df['count'] = words_df['word'].str.len()
+    words = positive_data['content'].explode()
+    words_df = pd.DataFrame({'word': words})
+    words_df['count'] = words_df['word'].str.len()
 
-    # words_df = words_df.query('count >= 2')
-    # words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
-    # #words_count_df = words_count_df.head(50)
+    words_df = words_df.query('count >= 2')
+    words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
+    #words_count_df = words_count_df.head(50)
 
-    # wordcloud1 = WordCloud(font_path = font_path, width=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
+    wordcloud1 = WordCloud(font_path = font_path, width=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
     
-    # fig1 = plt.figure(figsize=(5, 5))
-    # plt.title(select_species+"의 부정 단어 워드클라우드", fontproperties=prop)
-    # plt.imshow(wordcloud1, interpolation='bilinear')
-    # plt.axis('off')
+    fig1 = plt.figure(figsize=(5, 5))
+    plt.title(select_species+"의 부정 단어 워드클라우드", fontproperties=prop)
+    plt.imshow(wordcloud1, interpolation='bilinear')
+    plt.axis('off')
 
-    # ### 부정 워드클라우드
-    # false_df = wordcloud_df[wordcloud_df['지점명'] == select_species]
-    # ngeative_data = false_df[false_df['label'] == 0]
-    # ngeative_data['content'] = ngeative_data['content'].str.replace('\n', '')
-    # idx =ngeative_data[ngeative_data['content'].str.contains("좋|역시|맛있")].index
-    # ngeative_data = ngeative_data.drop(idx)
+    ### 부정 워드클라우드
+    false_df = wordcloud_df[wordcloud_df['지점명'] == select_species]
+    ngeative_data = false_df[false_df['label'] == 0]
+    ngeative_data['content'] = ngeative_data['content'].str.replace('\n', '')
+    idx =ngeative_data[ngeative_data['content'].str.contains("좋|역시|맛있")].index
+    ngeative_data = ngeative_data.drop(idx)
 
-    # contents = ngeative_data['content'].explode()
-    # words_df1 = pd.DataFrame({'content': contents})
-    # words_df1['count'] = words_df1['content'].str.len()
-    # words_df1 = words_df1.query('count > 4')
-    # #words_df1 = words_df1.head(50)
+    contents = ngeative_data['content'].explode()
+    words_df1 = pd.DataFrame({'content': contents})
+    words_df1['count'] = words_df1['content'].str.len()
+    words_df1 = words_df1.query('count > 4')
+    #words_df1 = words_df1.head(50)
 
-    # wordcloud2 = WordCloud(font_path = font_path, width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
+    wordcloud2 = WordCloud(font_path = font_path, width=400, height=400, background_color='white').generate(' '.join(words_df1['content']))
 
-    # fig2 = plt.figure(figsize=(5, 5))
-    # plt.title(select_species+"의 부정 단어 워드클라우드", fontproperties=prop)
-    # plt.imshow(wordcloud2, interpolation='bilinear')
-    # plt.axis('off')
+    fig2 = plt.figure(figsize=(5, 5))
+    plt.title(select_species+"의 부정 단어 워드클라우드", fontproperties=prop)
+    plt.imshow(wordcloud2, interpolation='bilinear')
+    plt.axis('off')
 
     # 키워드 분석
     keyword_data = keyword[keyword['지점명'] == select_species]
@@ -141,11 +141,11 @@ def show_species_data():
     st.plotly_chart(lineplot)
     st.plotly_chart(kewyword_plot)
 
-    # col1,col2 = st.columns([2,2])
-    # with col1 :
-    #     st.pyplot(fig1)
-    # with col2 :
-    #     st.pyplot(fig2)
+    col3,col4 = st.columns([2,2])
+    with col3 :
+        st.pyplot(fig1)
+    with col4 :
+        st.pyplot(fig2)
     
     st.plotly_chart(emotionplot)
 
