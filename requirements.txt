@@ -1,0 +1,9 @@
+folium
+streamlit
+pandas
+plotly
+plotly
+geopandas
+streamlit_folium
+matplotlib
+wordcloud
