@@ -15,10 +15,11 @@ from wordcloud import WordCloud
 # font = font_manager.FontProperties(fname = font_path).get_name()
 # rc('font', family = font)
 
-font = "Helvetica Neue"
+# Colab 의 한글 폰트 설정
+plt.rc('font', family='NanumBarunGothic') 
 
-#마이너스 깨짐 현상 해결
-rcParams['axes.unicode_minus'] = False
+# #마이너스 깨짐 현상 해결
+# rcParams['axes.unicode_minus'] = False
 
 # Load data
 df1 = pd.read_csv('./git_data/grid_병합.csv')
