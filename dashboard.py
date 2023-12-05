@@ -1,3 +1,7 @@
+$ sudo apt-get install -y fonts-nanum
+$ sudo fc-cache -fv
+$ rm ~/.cache/matplotlib -rf
+
 import folium
 import streamlit as st
 import pandas as pd
@@ -10,8 +14,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import font_manager
 
-# font_path = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')[0]
-# korean_font = font_manager.FontProperties(fname=font_path)
+plt.rc('font', family='NanumBarunGothic')
 
 # Load data
 df1 = pd.read_csv('./git_data/grid_병합.csv')
@@ -88,7 +91,7 @@ def show_species_data():
     words_count_df = words_df.groupby('word', as_index=False).count().sort_values('count', ascending=False)
     #words_count_df = words_count_df.head(50)
 
-    wordcloud1 = WordCloud(idth=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
+    wordcloud1 = WordCloud(width=400, height=400, background_color='white').generate_from_frequencies(dict(zip(words_count_df['word'], words_count_df['count'])))
     
     fig1 = plt.figure(figsize=(5, 5))
     plt.title(select_species+"의 부정 단어 워드클라우드")
