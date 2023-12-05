@@ -9,6 +9,8 @@ from streamlit_folium import st_folium
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import font_manager
+import warnings
+warnings.filterwarnings('ignore')
 
 font_path = './Nanum_Gothic/NanumGothic-Regular.ttf'
 prop = font_manager.FontProperties(fname=font_path)
@@ -79,7 +81,8 @@ def show_species_data():
     ### 긍정 워드클라우드
     ture_df = wordcloud_df[wordcloud_df['지점명'] == select_species]
     positive_data = ture_df[ture_df['label'] == 1]
-
+    positive_data['content'] = positive_data['content'].str.replace('\n', '')
+    
     words = positive_data['content'].explode()
     words_df = pd.DataFrame({'word': words})
     words_df['count'] = words_df['word'].str.len()
